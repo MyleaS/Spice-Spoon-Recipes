@@ -1,24 +1,30 @@
-import { Routes, Route, Link } from "react-router-dom";
+// src/App.jsx
+import { Routes, Route } from "react-router-dom";
 
-function Home() {
-  return <h2>Welcome to Spice Spoon Recipes 🍲</h2>;
-}
+// Shared components
+import Navbar from "./shared/Navbar";
+import Footer from "./shared/Footer";
 
-function Recipes() {
-  return <h2>Here are your recipes!</h2>;
-}
+// Page components
+import Home from "./pages/Home";
+import Recipes from "./pages/Recipes";
+import Favorites from "./pages/Favorites";
 
 function App() {
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/recipes">Recipes</Link>
-      </nav>
+      {/* Site-wide Navbar */}
+      <Navbar />
 
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
+
+      {/* Site-wide Footer */}
+      <Footer />
     </>
   );
 }
