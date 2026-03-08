@@ -1,31 +1,23 @@
-// src/App.jsx
 import { Routes, Route } from "react-router-dom";
+import Layout from "./shared/Layout";
 
-// Shared components
-import Navbar from "./shared/Navbar";
-import Footer from "./shared/Footer";
-
-// Page components
 import Home from "./pages/Home";
 import Recipes from "./pages/Recipes";
+import AddRecipe from "./pages/AddRecipe";
 import Favorites from "./pages/Favorites";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <>
-      {/* Site-wide Navbar */}
-      <Navbar />
-
-      {/* Routes */}
+    <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/add" element={<AddRecipe />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-
-      {/* Site-wide Footer */}
-      <Footer />
-    </>
+    </Layout>
   );
 }
 
