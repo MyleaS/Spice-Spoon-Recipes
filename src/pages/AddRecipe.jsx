@@ -1,17 +1,15 @@
-// import { v4 as uuid } from "uuid";
 import RecipeForm from "../features/recipes/RecipeForm";
-import { loadRecipes, saveRecipes } from "../features/recipes/recipeService";
+import {
+  loadRecipes,
+  saveRecipes,
+  createRecipe,
+} from "../features/recipes/recipeService";
 
 function AddRecipe() {
-  const handleSubmit = (recipe) => {
+  const handleSubmit = (fields) => {
     const recipes = loadRecipes();
-
-    const newRecipe = {
-      //   id: uuid(),
-      ...recipe,
-    };
-
-    saveRecipes([...recipes, newRecipe]);
+    const newRecipe = createRecipe(fields); // generates crypto UUID
+    saveRecipes([...recipes, newRecipe]); // no mutation
   };
 
   return (

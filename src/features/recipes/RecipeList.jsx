@@ -24,13 +24,21 @@
 
 import RecipeCard from "./RecipeCard";
 
-function RecipeList({ recipes, onDelete }) {
-  if (!recipes.length) return <p>No recipes yet.</p>;
+function RecipeList({ recipes, onDelete, onFavorite, favorites }) {
+  if (recipes.length === 0) {
+    return <p>No recipes found.</p>; // conditional render 6
+  }
 
   return (
     <div>
       {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} onDelete={onDelete} />
+        <RecipeCard
+          key={recipe.id} // unique key from id, NOT index
+          recipe={recipe}
+          onDelete={onDelete}
+          onFavorite={onFavorite}
+          isFavorite={favorites?.includes(recipe.id)}
+        />
       ))}
     </div>
   );
