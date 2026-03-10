@@ -1,43 +1,21 @@
-// import { useState } from "react";
-
-// function RecipeList() {
-//   // Simple array of recipe objects
-//   const [recipes, setRecipes] = useState([
-//     { id: 1, name: "Pasta" },
-//     { id: 2, name: "Tacos" },
-//     { id: 3, name: "Soup" },
-//   ]);
-
-//   return (
-//     <div>
-//       <h2>Recipe List</h2>
-//       <ul>
-//         {recipes.map((recipe) => (
-//           <li key={recipe.id}>{recipe.name}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
-
-// export default RecipeList;
-
 import RecipeCard from "./RecipeCard";
 
-function RecipeList({ recipes, onDelete, onFavorite, favorites }) {
+function RecipeList({ recipes, favorites, ratings, onFavorite, onRate, onDelete }) {
   if (recipes.length === 0) {
-    return <p>No recipes found.</p>; // conditional render 6
+    return <p className="empty-state">No recipes found.</p>;
   }
 
   return (
-    <div>
+    <div className="recipe-grid">
       {recipes.map((recipe) => (
         <RecipeCard
-          key={recipe.id} // unique key from id, NOT index
+          key={recipe.id}
           recipe={recipe}
-          onDelete={onDelete}
-          onFavorite={onFavorite}
           isFavorite={favorites?.includes(recipe.id)}
+          rating={ratings?.[recipe.id] || 0}
+          onFavorite={onFavorite}
+          onRate={onRate}
+          onDelete={onDelete}
         />
       ))}
     </div>

@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import StarRating from "../ratings/StarRating";
 
 function RecipeCard({ recipe, isFavorite, rating, onFavorite, onRate, onDelete }) {
+  function handleRate(recipeId, star) {
+    console.log("handleRate called", recipeId, star);
+    onRate(recipeId, star);
+  }
+
   return (
     <div className="card">
       {recipe.image && (
@@ -21,7 +26,7 @@ function RecipeCard({ recipe, isFavorite, rating, onFavorite, onRate, onDelete }
           )}
         </div>
 
-        <StarRating recipeId={recipe.id} rating={rating || 0} onRate={onRate} />
+        <StarRating recipeId={recipe.id} rating={rating || 0} onRate={handleRate} />
 
         <div className="card__actions">
           <button

@@ -34,6 +34,15 @@ function Recipes() {
     return () => { cancelled = true; };
   }, []);
 
+  // useEffect 2 — re-sync ratings when user navigates back to this page
+  useEffect(() => {
+    function syncRatings() {
+      setRatings(loadRatings());
+    }
+    window.addEventListener("focus", syncRatings);
+    return () => window.removeEventListener("focus", syncRatings);
+  }, []);
+
   useEffect(() => {
     document.title = `Spice & Spoon — My Recipes (${recipes.length})`;
     return () => { document.title = "Spice & Spoon"; };

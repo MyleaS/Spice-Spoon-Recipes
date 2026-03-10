@@ -14,6 +14,13 @@ export async function getMealById(id) {
   return data.meals?.[0] || null;
 }
 
+export async function filterByCategory(category) {
+  const res = await fetch(`${BASE_URL}/filter.php?c=${encodeURIComponent(category)}`);
+  if (!res.ok) throw new Error("Failed to filter by category");
+  const data = await res.json();
+  return data.meals || [];
+}
+
 export async function getCategories() {
   const res = await fetch(`${BASE_URL}/categories.php`);
   if (!res.ok) throw new Error("Failed to fetch categories");
@@ -44,7 +51,7 @@ export function normalizeMeal(meal) {
     category: meal.strCategory,
     instructions: meal.strInstructions,
     ingredients: ingredients.join(", "),
-    image: meal.strMealThumb,
+    image: meal.strMealThumb + "/preview",  // optimized thumbnail ~220x220
     source: "api",
   };
 }
